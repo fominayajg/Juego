@@ -1,12 +1,13 @@
 class balaObj {
-    constructor(x,y) {
+    constructor(x,y,img) {
        this.posX=x
        this.posY=y
        this.posFinX
        this.posFinY
        this.cambio=true
        this.img=new Image
-       this.img.src="img/bala.png"
+       this.img.src=img
+       
     }
 
     

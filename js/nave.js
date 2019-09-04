@@ -54,7 +54,11 @@ mover() {
     disparar(){
        
            if (counter%20==0) {
-               balas.push(new balaObj(nave.posx, nave.posy))
+               if(dano<100)
+               balas.push(new balaObj(nave.posx, nave.posy,"img/bala.png"))
+               else
+                   balas.push(new balaObj(nave.posx, nave.posy, "img/bullet.png"))
+
            }
           
            

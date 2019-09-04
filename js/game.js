@@ -1,17 +1,20 @@
 
 const canvas = document.querySelector("canvas");
+const button = document.querySelector("button");
+const sec = document.querySelector("section");
 const ctx = canvas.getContext("2d");
+var empezar=false
 var counter = 0
 var moverseX = [false, 0]
 var moverseY = [false, 0]
 var asteroides = []
 var balas = []
 var proporcion = 0
-
+var dano =30
 
 var vidas=5
 var puntuacion=0
-
+var diff=1
 
 
 var w = window.innerWidth
@@ -28,7 +31,10 @@ var nave = new naveObj(w2, h2)
 //DETECTA POSICION DEL RATON
 
 
-
+button.addEventListener("click",function () {
+    empezar=true
+    sec.style="display:none"
+})
 
 
 
@@ -37,12 +43,19 @@ var nave = new naveObj(w2, h2)
 
 window.onload = function () {
 
-
+    
+        
+    
 
     var intervalID = setInterval(() => {
+
+        if (empezar == true) {
         counter++
-        if (counter > 1000) {
+        if (counter > 10000) {
             counter = 0;
+        }
+        if (counter > 5000) {
+            diff++;
         }
 
 
@@ -50,10 +63,10 @@ window.onload = function () {
         nave.disparar()
 
         if (moverseX[0] == true) {
-            nave.posx += moverseX[1] * 4
+            nave.posx += moverseX[1] * 6
         }
         if (moverseY[0] == true) {
-            nave.posy += moverseY[1] * 4
+            nave.posy += moverseY[1] * 6
         }
 
         ctx.clearRect(0, 0, w, h)
@@ -63,15 +76,43 @@ window.onload = function () {
 
 
         ctx.drawImage(nave.img, nave.posx - 40, nave.posy - 40, 80, 80)
-        
-        
+        if (nave.posx>w){
+            nave.posx=0
+            ctx.drawImage(nave.img, nave.posx - 40, nave.posy - 40, 80, 80)
+        }
+        if (nave.posx < 0) {
+             nave.posx = w
+            ctx.drawImage(nave.img, nave.posx - 40, nave.posy - 40, 80, 80)
+        }
 
+            if (nave.posy > h-60) {
+                nave.posy = h-60
+                ctx.drawImage(nave.img, nave.posx - 40, nave.posy - 40, 80, 80)
+            }
+        
+        if (diff >= 3) {
+           
+            if (counter % 400 == 0) {
+                asteroides.push(new asteroidObj(Math.floor(Math.random() * w), "img/marron.png", 250, "asteroide"))
+            }
+        }
+        if (diff>=2) {
+            if (counter % 300 == 0) {
+                asteroides.push(new asteroidObj(Math.floor(Math.random() * w), "img/asteroid.png", 100, "asteroide"))
+            }
+            if (counter % 500 == 0) {
+                asteroides.push(new asteroidObj(Math.floor(Math.random() * w), "img/marron.png", 250, "asteroide"))
+            }
+        }
 
         if (counter % 200 == 0) {
-            asteroides.push(new asteroidObj(Math.floor(Math.random() * w), "img/asteroid.png",100))
+            asteroides.push(new asteroidObj(Math.floor(Math.random() * w), "img/asteroid.png",100,"asteroide"))
         }
         if (counter % 700 == 0){
-            asteroides.push(new asteroidObj(Math.floor(Math.random() * w), "img/marron.png", 200))
+            asteroides.push(new asteroidObj(Math.floor(Math.random() * w), "img/marron.png", 250,"asteroide"))
+        }
+        if (counter % 1000 == 0) {
+            asteroides.push(new asteroidObj(Math.floor(Math.random() * w), "img/upgrade.png", 50,"mejora"))
         }
 
         for (let i = 0; i < asteroides.length; i++) {
@@ -80,7 +121,7 @@ window.onload = function () {
             if (asteroides[i].posY>=h-100) {
                 vidas--
                 if (vidas<0){
-                    alert("gameover")
+                    finish()
                     clearInterval(intervalID)
                 }
                 asteroides.splice(i,1)
@@ -132,8 +173,13 @@ window.onload = function () {
                     balas[i].posX + 30 > asteroides[j].posXIni
                 ) {
                     balas.splice(i, 1)
-                    asteroides[j].health -= 35
+                    asteroides[j].health -= dano
                     if (asteroides[j].health <= 0) {
+                        if (asteroides[j].name == "mejora") {
+                            if(dano<100)
+                            dano+=30
+                            
+                        }
                         asteroides.splice(j, 1)
                         puntuacion++
                     }
@@ -165,13 +211,13 @@ window.onload = function () {
            
         }
 
-
+    }
 
     }, 1000 / 60);
 
 
 
-
+    
 
 };
 
