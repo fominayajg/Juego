@@ -5,9 +5,14 @@
    
 }
 
+body{
+    position: relative;
+}
+
 canvas{
     
     background-image: url("img/background.jpg");
+    
     
 }
 section {
@@ -36,4 +41,18 @@ button{
     border-radius:10px;
     cursor: pointer;
 
+}
+
+.again{
+    display: none;
+     width: 200px;
+    height: 100px;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 24px;
+    border-radius:10px;
+    cursor: pointer;
+    position: absolute;
+    bottom:15%;
+    left: 45%;
 }

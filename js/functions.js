@@ -48,10 +48,22 @@ function finish() {
         ctx.fillText(`GAME OVER`, w2/2, h2-50,w2)
         ctx.fillText(`Has sacado: ${puntuacion} puntos`,w2/2 , h2 + 100,w2)
         
-
+        buttonAgain.style="display:block"
 
         
         ctx.closePath()
     }, 100);
     
+}
+
+function reset() {
+     counter = 0
+     asteroides = []
+     balas = []
+     dano = 30
+     vidas = 5
+     puntuacion = 0
+     diff = 1
+     nave.posx=w2
+     name.posy=h2
 }
