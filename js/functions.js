@@ -1,8 +1,13 @@
+var f = new FontFace("Lato", "https://fonts.googleapis.com/css?family=Play&display=swap");
+f.load().then(function () {
+    // Ready to use the font in a canvas context
+});
+
 function HUDdraw() {
     ctx.beginPath()
     ctx.fillStyle = "rgb(255, 255, 255)"
     ctx.font = '30px Play'
-    ctx.fillText(`vidas: ${vidas}`, 40, 40)
+    ctx.fillText(`Vidas: ${vidas}`, 40, 40)
     ctx.fillText(`Puntos : ${puntuacion}`, 40, 80)
     ctx.fillText(`Daño : ${dano}`, 40, 120)
     ctx.closePath()

@@ -5,6 +5,7 @@ const buttonAgain = document.querySelector(".again");
 const sec = document.querySelector("section");
 const ctx = canvas.getContext("2d");
 var empezar=false
+var pause=false
 var counter = 0
 var moverseX = [false, 0]
 var moverseY = [false, 0]
@@ -29,6 +30,8 @@ var nave = new naveObj(w2, h2)
 
 
 
+
+
 //DETECTA POSICION DEL RATON
 
 
@@ -39,21 +42,32 @@ var nave = new naveObj(w2, h2)
 
 window.onload = function () {
 
+    myAudio = new Audio('music/sci-fi.wav');
+   
+    myAudio.addEventListener('ended', function () {
+        this.currentTime = 0;
+        this.play();
+    }, false);
 
     buttonStr.addEventListener("click", function () {
         empezar = true
         sec.style = "display:none"
-        canvas.style="cursor:none"
+        
+        
+        myAudio.play();
     })
 
     buttonAgain.addEventListener("click", function () {
         buttonAgain.style = "display:none"
-        canvas.style = "cursor:none"
+        
         empezar = true
         reset()
         start()
 
     })
+
+   
+    
         
     function start() {
 
@@ -234,7 +248,6 @@ window.onload = function () {
     }
     start()
     
-
 
 
     
