@@ -1,4 +1,4 @@
-var f = new FontFace("Lato", "https://fonts.googleapis.com/css?family=Play&display=swap");
+var f = new FontFace("Play", "https://fonts.googleapis.com/css?family=Play&display=swap");
 f.load().then(function () {
     // Ready to use the font in a canvas context
 });
@@ -70,5 +70,5 @@ function reset() {
      puntuacion = 0
      diff = 1
      nave.posx=w2
-     name.posy=h2
+    nave.posy = h - 60
 }

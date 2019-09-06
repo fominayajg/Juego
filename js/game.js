@@ -26,7 +26,7 @@ canvas.setAttribute("height", `${h}px`);
 var w2 = w / 2;
 var h2 = h / 2;
 var mousePos = []
-var nave = new naveObj(w2, h2)
+var nave = new naveObj(w2, h - 60)
 
 
 
@@ -128,7 +128,7 @@ window.onload = function () {
                 if (diff >= 3) {
 
                     if (counter % 400 == 0) {
-                        asteroides.push(new asteroidObj(Math.floor(Math.random() * w-20), "img/marron.png", 250, "asteroide"))
+                        asteroides.push(new asteroidObj(Math.floor(Math.random() * w-20), "img/marron.png", 360, "asteroide"))
                     }
                 }
                 if (diff >= 2) {
@@ -157,6 +157,10 @@ window.onload = function () {
                     ctx.drawImage(asteroides[i].img, asteroides[i].posXIni, asteroides[i].posY, 80, 80)
                     if (asteroides[i].posY >= h - 100) {
                         vidas--
+                        if(dano>40){
+                            dano -= 30
+                        }
+                        
                         if (vidas < 0) {
                             canvas.style = "cursor:auto"
                             finish()
